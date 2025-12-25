@@ -1,5 +1,6 @@
 "use client";
 
+import AIChatAssistant from "@/components/AIChatAssistant";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
@@ -53,8 +54,9 @@ const App: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-110 bg-black transition-transform duration-500 ease-in-out ${isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-          }`}
+        className={`fixed inset-0 z-110 bg-black transition-transform duration-500 ease-in-out ${
+          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
       >
         <div className="flex flex-col h-full p-8">
           <div className="flex justify-between items-center mb-20">
@@ -130,8 +132,9 @@ const App: React.FC = () => {
       </nav>
 
       <div
-        className={`lg:pl-24 transition-all duration-500 ${isMobileMenuOpen ? "opacity-20 blur-sm" : "opacity-100 blur-0"
-          }`}
+        className={`lg:pl-24 transition-all duration-500 ${
+          isMobileMenuOpen ? "opacity-20 blur-sm" : "opacity-100 blur-0"
+        }`}
       >
         <Hero />
 
@@ -148,7 +151,10 @@ const App: React.FC = () => {
                 <h3 className="text-4xl md:text-7xl font-bold font-display leading-[1.05] tracking-tighter">
                   ENGINEERING <br /> MODERN <br /> INTERFACES.
                 </h3>
-                <p data-cursor="cta" className="text-lg md:text-xl text-gray-500 font-light leading-relaxed max-w-md">
+                <p
+                  data-cursor="cta"
+                  className="text-lg md:text-xl text-gray-500 font-light leading-relaxed max-w-md"
+                >
                   Based in Bhaktapur, I graduated with a Bachelor&apos;s in IT
                   from Texas College (2023). My journey is defined by
                   transforming complex requirements into elegant,
@@ -164,7 +170,10 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <div data-cursor="project" className="relative group overflow-hidden border border-white/5">
+              <div
+                data-cursor="project"
+                className="relative group overflow-hidden border border-white/5"
+              >
                 <img
                   src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000&grayscale=true"
                   alt="Sachin's Coding Environment"
@@ -289,7 +298,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* <AIChatAssistant /> */}
+      <AIChatAssistant />
 
       <style>{`
         .outline-text {
