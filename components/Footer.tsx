@@ -9,17 +9,16 @@ export const Footer = () => {
         </div>
         <div className="flex gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">
           <a
-            href="https://github.com/sachinthakur9983"
+            target="_blank"
+            href="https://github.com/sachinthakur749"
             className="hover:text-white transition-colors"
           >
             Github
           </a>
-          <a href="#" className="hover:text-white transition-colors">
+          <a target="_blank" href="https://www.linkedin.com/in/sachin-thakur-061a1b223/" className="hover:text-white transition-colors">
             LinkedIn
           </a>
-          <a href="#" className="hover:text-white transition-colors">
-            Portfolio
-          </a>
+
         </div>
       </div>
     </footer>

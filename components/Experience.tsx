@@ -19,7 +19,7 @@ const ExperienceItem: React.FC<Props> = ({ experience }) => {
         </span>
       </div>
 
-      <div className="text-blue-500 font-medium mb-4">{experience.company}</div>
+      <div className="text-gray-400 font-medium mb-4">{experience.company}</div>
 
       <ul className="space-y-2">
         {experience.description.map((item, idx) => (

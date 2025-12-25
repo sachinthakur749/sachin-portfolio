@@ -34,16 +34,17 @@ const Hero: React.FC = () => {
               <span className="relative z-10">View Projects</span>
             </a>
             <a
-              href="#contact"
-              className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1"
+              href="/cv.pdf"
+              target="_blank"
+              className="group text-white/70 hover:text-white relative text-xs font-bold uppercase tracking-[0.4em] py-4 px-8  transition-all duration-300"
             >
-              Contact Sachin
+              Download CV
             </a>
           </div>
         </div>
       </div>
 
-      <div
+      {/* <div
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 text-white/20 reveal"
         style={{ transitionDelay: "0.8s" }}
       >
@@ -53,7 +54,7 @@ const Hero: React.FC = () => {
         <span className="text-[9px] uppercase tracking-[0.5em] font-bold">
           Scroll Down
         </span>
-      </div>
+      </div> */}
 
       <style>{`
         @keyframes scroll-line {

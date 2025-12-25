@@ -11,20 +11,37 @@ const CustomCursor: React.FC = () => {
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  // Store mouse position for smooth animation
+  const mousePos = useRef({ x: 0, y: 0 });
+  const ringPos = useRef({ x: 0, y: 0 });
+  const rafId = useRef<number>(0);
+
   useEffect(() => {
+    let eventListeners: Array<{ element: Element; event: string; handler: EventListener }> = [];
+
     const onMouseMove = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
+      mousePos.current = { x: e.clientX, y: e.clientY };
+    };
 
-      const { clientX, clientY } = e;
-
+    const animate = () => {
+      // Instant dot movement
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
+        dotRef.current.style.left = `${mousePos.current.x}px`;
+        dotRef.current.style.top = `${mousePos.current.y}px`;
       }
 
+      // Smooth ring movement with lerp (linear interpolation)
       if (ringRef.current) {
-        // Reduced transition time for more responsive feel while maintaining smoothness
-        ringRef.current.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
+        const lerp = 0.15; // Adjust for smoothness (0.1 = smoother, 0.3 = faster)
+        ringPos.current.x += (mousePos.current.x - ringPos.current.x) * lerp;
+        ringPos.current.y += (mousePos.current.y - ringPos.current.y) * lerp;
+
+        ringRef.current.style.left = `${ringPos.current.x}px`;
+        ringRef.current.style.top = `${ringPos.current.y}px`;
       }
+
+      rafId.current = requestAnimationFrame(animate);
     };
 
     const onMouseDown = () => setIsClicking(true);
@@ -36,8 +53,14 @@ const CustomCursor: React.FC = () => {
     const onMouseEnter = () => setIsVisible(true);
 
     const attachHoverListeners = () => {
+      // Clean up old listeners
+      eventListeners.forEach(({ element, event, handler }) => {
+        element.removeEventListener(event, handler);
+      });
+      eventListeners = [];
+
       const targets = document.querySelectorAll(
-        "a, button, .group, input, textarea, [data-cursor]"
+        "a, button, .group, input, textarea, [data-cursor], img"
       );
 
       targets.forEach((target) => {
@@ -62,6 +85,12 @@ const CustomCursor: React.FC = () => {
 
         target.addEventListener("mouseenter", handleEnter);
         target.addEventListener("mouseleave", handleLeave);
+
+        // Store listeners for cleanup
+        eventListeners.push(
+          { element: target, event: "mouseenter", handler: handleEnter },
+          { element: target, event: "mouseleave", handler: handleLeave }
+        );
       });
     };
 
@@ -72,6 +101,7 @@ const CustomCursor: React.FC = () => {
     window.addEventListener("mouseleave", onMouseLeave);
 
     attachHoverListeners();
+    rafId.current = requestAnimationFrame(animate);
 
     const observer = new MutationObserver(attachHoverListeners);
     observer.observe(document.body, { childList: true, subtree: true });
@@ -82,6 +112,16 @@ const CustomCursor: React.FC = () => {
       window.removeEventListener("mouseup", onMouseUp);
       window.removeEventListener("mouseenter", onMouseEnter);
       window.removeEventListener("mouseleave", onMouseLeave);
+
+      // Clean up event listeners
+      eventListeners.forEach(({ element, event, handler }) => {
+        element.removeEventListener(event, handler);
+      });
+
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
+
       observer.disconnect();
     };
   }, [isVisible]);
@@ -102,25 +142,28 @@ const CustomCursor: React.FC = () => {
       {/* Precision Dot */}
       <div
         ref={dotRef}
-        className={`fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] transition-opacity duration-300 mix-blend-difference ${
-          isVisible ? "opacity-100" : "opacity-0"
-        } ${mode !== "default" ? "scale-0" : "scale-100"}`}
-        style={{ marginTop: "-0.09375rem", marginLeft: "-0.09375rem" }}
+        className={`fixed w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] transition-opacity duration-300 mix-blend-difference ${isVisible ? "opacity-100" : "opacity-0"
+          } ${mode !== "default" ? "scale-0" : "scale-100"}`}
+        style={{
+          transform: "translate(-50%, -50%)",
+          willChange: "left, top"
+        }}
       />
 
       {/* Interactive Ring */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 w-10 h-10 border rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out mix-blend-difference flex items-center justify-center ${
-          isVisible ? "opacity-100" : "opacity-0"
-        } ${getRingStyles()} ${isClicking ? "scale-[0.8]" : ""}`}
-        style={{ marginTop: "-1.25rem", marginLeft: "-1.25rem" }}
+        className={`fixed w-10 h-10 border rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out mix-blend-difference flex items-center justify-center ${isVisible ? "opacity-100" : "opacity-0"
+          } ${getRingStyles()} ${isClicking ? "scale-[0.8]" : ""}`}
+        style={{
+          transform: "translate(-50%, -50%)",
+          willChange: "left, top"
+        }}
       >
         {/* Label for Project Hover */}
         <span
-          className={`text-[4px] font-black tracking-[0.2em] text-black uppercase transition-opacity duration-300 ${
-            mode === "project" ? "opacity-100" : "opacity-0"
-          }`}
+          className={`text-[4px] font-black tracking-[0.2em] text-black uppercase transition-opacity duration-300 ${mode === "project" ? "opacity-100" : "opacity-0"
+            }`}
         >
           VIEW
         </span>
@@ -128,7 +171,7 @@ const CustomCursor: React.FC = () => {
 
       <style>{`
         @media (pointer: fine) {
-          body, a, button, [role="button"], .group {
+          body, a, button, [role="button"], .group, img {
             cursor: none !important;
           }
         }

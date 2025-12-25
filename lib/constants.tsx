@@ -17,7 +17,7 @@ export const PROJECTS: Project[] = [
       "A student portfolio management and centralized application system for streamlining university admissions and job applications, featuring real-time result publication.",
     tags: ["React", "Zustand", "Messaging", "Education"],
     imageUrl:
-      "https://images.unsplash.com/photo-1523240715632-d98454c730bb?auto=format&fit=crop&q=80&w=800&grayscale=true",
+      "/images/tuteeline.png",
   },
   {
     id: "3",
@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
       "A high-performance e-commerce platform for appliance repairs and spare parts, optimized for SEO with dynamic blog features and service scheduling.",
     tags: ["Next.js", "SEO", "E-commerce", "Service"],
     imageUrl:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800&grayscale=true",
+      "/images/technical-sewa.png",
   },
 ];
 

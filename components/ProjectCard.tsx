@@ -9,7 +9,6 @@ const ProjectCard: React.FC<Props> = ({ project }) => {
   return (
     <div
       className="group relative border-b border-white/5 py-12 md:py-20 reveal"
-      data-cursor="project"
     >
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-20">
         <div className="w-full md:w-1/2 order-2 md:order-1">
@@ -51,6 +50,7 @@ const ProjectCard: React.FC<Props> = ({ project }) => {
 
         <div className="w-full md:w-1/2 order-1 md:order-2 overflow-hidden bg-white/5 border border-white/5 aspect-[16/10]">
           <img
+            data-cursor="project"
             src={project.imageUrl}
             alt={project.title}
             className="w-full h-full object-cover grayscale opacity-20 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"

@@ -31,7 +31,7 @@ const SideNav: React.FC = () => {
 
       <div className="flex flex-col space-y-6">
         <a
-          href="https://github.com/sachinthakur9983"
+          href="https://github.com/sachinthakur749"
           target="_blank"
           rel="noreferrer"
           className="text-gray-500 hover:text-white transition-colors"
@@ -41,7 +41,7 @@ const SideNav: React.FC = () => {
           </svg>
         </a>
         <a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/in/sachin-thakur-061a1b223/"
           target="_blank"
           rel="noreferrer"
           className="text-gray-500 hover:text-white transition-colors"
