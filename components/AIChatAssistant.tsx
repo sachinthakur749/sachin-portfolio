@@ -1,3 +1,5 @@
+"use client";
+
 import { askAI } from "@/lib/geminiService";
 import React, { useState, useRef, useEffect } from "react";
 
@@ -33,7 +35,10 @@ const AIChatAssistant: React.FC = () => {
     const aiResponse = await askAI(userMessage);
 
     setIsTyping(false);
-    setMessages((prev) => [...prev, { role: "bot", text: aiResponse }]);
+    setMessages((prev) => [
+      ...prev,
+      { role: "bot", text: aiResponse || "Unable to process request." },
+    ]);
   };
 
   return (
