@@ -1,4 +1,4 @@
-import { Experience, Project, Skill } from "@/types";
+import { Experience, Project, Skill, BlogPost } from "@/types";
 
 export const PROJECTS: Project[] = [
   {
@@ -16,8 +16,7 @@ export const PROJECTS: Project[] = [
     description:
       "A student portfolio management and centralized application system for streamlining university admissions and job applications, featuring real-time result publication.",
     tags: ["React", "Zustand", "Messaging", "Education"],
-    imageUrl:
-      "/images/tuteeline.png",
+    imageUrl: "/images/tuteeline.png",
   },
   {
     id: "3",
@@ -25,8 +24,7 @@ export const PROJECTS: Project[] = [
     description:
       "A high-performance e-commerce platform for appliance repairs and spare parts, optimized for SEO with dynamic blog features and service scheduling.",
     tags: ["Next.js", "SEO", "E-commerce", "Service"],
-    imageUrl:
-      "/images/technical-sewa.png",
+    imageUrl: "/images/technical-sewa.png",
   },
 ];
 

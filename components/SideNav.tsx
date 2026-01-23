@@ -2,17 +2,18 @@ import React from "react";
 
 const SideNav: React.FC = () => {
   const navItems = [
-    { label: "Start", href: "#" },
+    { label: "Start", href: "/" },
     { label: "About", href: "#about" },
     { label: "Work", href: "#work" },
     { label: "Lab", href: "#experience" },
     { label: "Talk", href: "#contact" },
+    { label: "Blog", href: "blog" },
   ];
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-20 md:w-24 border-r border-white/10 hidden lg:flex flex-col justify-between items-center py-10 z-50 bg-black">
       <div className="flex flex-col items-center">
-        <a href="#" className="text-xl font-bold tracking-tighter">
+        <a href="#" className="text-xl text-white font-bold tracking-tighter">
           S<span className="text-gray-500">.</span>T
         </a>
       </div>

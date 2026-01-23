@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
+import SideNav from "@/components/SideNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Sachin Thakur",
-  description: "Based in Bhaktapur, I graduated with a Bachelor&apos;s in IT from Texas College (2023). My journey is defined by transforming complex requirements into elegant, high-performance web solutions.",
+  description:
+    "Based in Bhaktapur, I graduated with a Bachelor&apos;s in IT from Texas College (2023). My journey is defined by transforming complex requirements into elegant, high-performance web solutions.",
 };
 
 export default function RootLayout({
@@ -27,6 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <SideNav />
       <body
         className={`${geistSans.variable} ${geistMono.variable} noise antialiased`}
       >

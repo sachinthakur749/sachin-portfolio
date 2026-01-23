@@ -17,7 +17,11 @@ const CustomCursor: React.FC = () => {
   const rafId = useRef<number>(0);
 
   useEffect(() => {
-    let eventListeners: Array<{ element: Element; event: string; handler: EventListener }> = [];
+    let eventListeners: Array<{
+      element: Element;
+      event: string;
+      handler: EventListener;
+    }> = [];
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
@@ -60,13 +64,13 @@ const CustomCursor: React.FC = () => {
       eventListeners = [];
 
       const targets = document.querySelectorAll(
-        "a, button, .group, input, textarea, [data-cursor], img"
+        "a, button, .group, input, textarea, [data-cursor], img",
       );
 
       targets.forEach((target) => {
         const handleEnter = () => {
           const customMode = (target as HTMLElement).getAttribute(
-            "data-cursor"
+            "data-cursor",
           ) as CursorMode;
           if (customMode) {
             setMode(customMode);
@@ -89,7 +93,7 @@ const CustomCursor: React.FC = () => {
         // Store listeners for cleanup
         eventListeners.push(
           { element: target, event: "mouseenter", handler: handleEnter },
-          { element: target, event: "mouseleave", handler: handleLeave }
+          { element: target, event: "mouseleave", handler: handleLeave },
         );
       });
     };
@@ -142,28 +146,31 @@ const CustomCursor: React.FC = () => {
       {/* Precision Dot */}
       <div
         ref={dotRef}
-        className={`fixed w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] transition-opacity duration-300 mix-blend-difference ${isVisible ? "opacity-100" : "opacity-0"
-          } ${mode !== "default" ? "scale-0" : "scale-100"}`}
+        className={`fixed w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] transition-opacity duration-300 mix-blend-difference ${
+          isVisible ? "opacity-100" : "opacity-0"
+        } ${mode !== "default" ? "scale-0" : "scale-100"}`}
         style={{
           transform: "translate(-50%, -50%)",
-          willChange: "left, top"
+          willChange: "left, top",
         }}
       />
 
       {/* Interactive Ring */}
       <div
         ref={ringRef}
-        className={`fixed w-10 h-10 border rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out mix-blend-difference flex items-center justify-center ${isVisible ? "opacity-100" : "opacity-0"
-          } ${getRingStyles()} ${isClicking ? "scale-[0.8]" : ""}`}
+        className={`fixed w-10 h-10 scale-100 border-white/40 border rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out mix-blend-difference flex items-center justify-center ${
+          isVisible ? "opacity-100" : "opacity-0"
+        } ${getRingStyles()} ${isClicking ? "scale-[0.8]" : ""}`}
         style={{
           transform: "translate(-50%, -50%)",
-          willChange: "left, top"
+          willChange: "left, top",
         }}
       >
         {/* Label for Project Hover */}
         <span
-          className={`text-[4px] font-black tracking-[0.2em] text-black uppercase transition-opacity duration-300 ${mode === "project" ? "opacity-100" : "opacity-0"
-            }`}
+          className={`text-[4px] font-black tracking-[0.2em] text-black uppercase transition-opacity duration-300 ${
+            mode === "project" ? "opacity-100" : "opacity-0"
+          }`}
         >
           VIEW
         </span>

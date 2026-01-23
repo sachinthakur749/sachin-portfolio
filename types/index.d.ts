@@ -19,3 +19,14 @@ export interface Skill {
   category: string;
   items: string[];
 }
+
+export interface BlogPost {
+  _id: string;
+  title: string;
+  slug: string;
+  content: string;
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  __v?: number;
+}
